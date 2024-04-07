@@ -55,13 +55,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 #EMAIL_PORT = 1025
 
 # Gmail SMTP Server
+ADMINS = [('Chris', 'rchris0214@gmail.com')]
+MANAGERS = ADMINS
+#SERVER_EMAIL = "civamwebmaster@gmail.com"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'civamwebmaster@gmail.com'
-EMAIL_HOST_PASSWORD = 'fnanfjjakavwowhk'
+EMAIL_HOST_USER = 'rchris0214@gmail.com'
+EMAIL_HOST_PASSWORD = 'murhebepxpojqlud'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-
 '''
 CORS_ORIGIN_WHITELIST = [
     'https://127.0.0.1:4200',
@@ -192,6 +195,17 @@ LOGGING = {
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
         },
     },
     
