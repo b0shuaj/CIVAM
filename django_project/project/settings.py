@@ -40,7 +40,7 @@ SECRET_KEY = 'au+me7y%0)7t4b@tqh#r7rez)badj=5vxv#ftyhdpd=a1#r-#d'
 DEBUG = False
 
 #TODO: MAKE IT SO THIS TOGGLE IS AUTOMATED FOR DEV/PROD
-ALLOWED_HOSTS = ['civam-mt.org', 'http://maps.googleapis.com/', 'https://maps.googleapis.com/']
+ALLOWED_HOSTS = ['civam-mt.org', 'http://maps.googleapis.com/', 'https://maps.googleapis.com/', '18.117.38.113']
 # STATIC_ROOT = os.path.join('~/CISC475_D5/django_project', 'static/')
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
@@ -55,14 +55,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 #EMAIL_PORT = 1025
 
 # Gmail SMTP Server
-ADMINS = [('Chris', 'rchris0214@gmail.com')]
+ADMINS = [()] #add email, recommended gmail, to recieve django errors
 MANAGERS = ADMINS
 #SERVER_EMAIL = "civamwebmaster@gmail.com"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'rchris0214@gmail.com'
-EMAIL_HOST_PASSWORD = 'murhebepxpojqlud'
+EMAIL_HOST_USER = '' #add an email from ADMINS here
+EMAIL_HOST_PASSWORD = 'murhebepxpojqlud' #add a less secure apps password, gmail has a feature called 'app passwords' that works
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 '''
