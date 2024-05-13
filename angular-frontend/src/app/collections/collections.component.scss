@@ -23,6 +23,12 @@ $gold: #bf9b30;
 
 }
 
+.title{
+    @media (max-width:900px) and (orientation: portrait) {
+        padding-top: 36%;
+    }
+}
+
 .layer-lg {
     width: 100%;
     height: 45vh;
@@ -80,7 +86,7 @@ $gold: #bf9b30;
         padding-top: min(10%, 30vh);
     }
     @media (max-width:1500px) {
-        padding-top: min(20%, 30vh);
+        padding-top: min(10%, 30vh);
     }
     background: url('../../assets/images/background-bill-yellowtail-cropped.jpg') no-repeat fixed;;
     margin-top: 3vh;
@@ -251,8 +257,10 @@ $gold: #bf9b30;
     }
 }
 
-@media(max-width: 1500px) {
-
+@media(max-width: 1500px) and (min-width: 900px){
+    .collection-grid-row {
+        row-gap: 10vh; 
+    }
     .even {
         background-color: #e3f4fb;
     
@@ -265,8 +273,8 @@ $gold: #bf9b30;
     .collection-collection-grid {
        
         display: grid;
-        padding-left: min(15%, 300px);
-        padding-right: min(15%, 300px);
+        padding-left: min(10%, 300px);
+        padding-right: min(10%, 300px);
 
         .collection-description {
             padding: 10%;
@@ -369,4 +377,119 @@ $gold: #bf9b30;
     text-align: center;
     font-size: xx-large;
     padding-top: 5% !important;
+}
+
+@media(max-width: 900px) {
+    .collection-grid-row {
+        row-gap: 0; 
+    }
+    .even {
+        background-color: #e3f4fb;
+    
+    }
+    
+    .odd {
+        background-color: #d4efff;;
+    }
+
+    .collection-collection-grid {
+       
+        
+        padding-left: min(15%, 300px);
+        padding-right: min(15%, 300px);
+
+        .collection-description {
+            padding: 0%;
+        }
+
+        p {
+            text-align: justify;
+            font-size: small;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: large;
+            font-weight: bold;
+        }
+
+        .collection-grid-left {
+            grid-column: 1;
+            text-align: left;
+            font-size: x-large;
+            align-self: center;
+
+            .collection-inline-text {
+                display: inline-block;
+                vertical-align: middle;
+                line-height: normal;
+                font-size: large;
+            }
+        }
+
+        .collection-grid-right {
+            grid-column: 2;
+            text-align: right;
+            font-size: x-large;
+            align-self: center;
+
+            .collection-inline-text {
+                display: inline-block;
+                vertical-align: middle;
+                line-height: normal;
+                font-size: large;
+            }
+        }
+
+        .collection-grid-top {
+            grid-row: 1;
+        }
+
+        .collection-grid-bottom {
+            grid-row: 2;
+            text-align: center;
+            font-size: x-large;
+        }
+
+        .collection-img-container {
+            position: relative;
+        }
+
+        .collection-img {
+            width: 100%;
+            height: auto;
+            max-height: 50vh;
+            // -o-object-fit: cover;
+            object-fit: cover;
+        }
+
+        .collection-img-text-img-left {
+            bottom: 0;
+            left: 5%;
+            position: absolute;
+        }
+
+        .collection-img-text-img-right {
+            bottom: 0;
+            right: 5%;
+            position: absolute;
+        }
+
+
+        .collection-btn {
+            margin-top: 1vh;
+            background-color: #f7d417; /* Green */
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: x-large;
+        }
+
+        .collection-compress-text {
+            font-size: medium;
+        }
+    }
 }
