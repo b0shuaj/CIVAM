@@ -13,7 +13,7 @@ Note that [General Setup](#General-Setup), [Front-End Specific Setup](#Front-End
 **Steps 4-7 are for installing VBox guest additions and are optional. This will give you access to quality of life changes such as full-screen display, host-to-guest copy paste, and more.**
 1. download virtualbox for your OS
 2. install xubuntu (20.04.3) (this will be a torrent file, you can download these types of files in a client such as qBittorrent)
-3. open virtualbox and create a new virtual machine, using the downloaded file as the ISO image  
+3. open virtualbox and create a new virtual machine, using the downloaded file as the ISO image + install git, python, and an IDE  
 4. in the virtualbox window, select Devices -> Insert Guest Additions CD Image
 5. open the virtual machine's file explorer, and select the CD "VBox_GAs"
 6. find the VBoxLinuxAdditions.run file, right click it, and select "Open Terminal Here"
@@ -30,15 +30,14 @@ Note that [General Setup](#General-Setup), [Front-End Specific Setup](#Front-End
     ```
 
 ## Front-End Specific Setup
-1. install npm: `sudo npm install -g npm@latest`
-2. install angular-cli: `sudo npm install -g @angular/cli`
+1. install npm: `sudo npm install -g npm@6.14.17`
+2. install angular-cli: `sudo npm install -g @angular/cli@11.2.14` 
 3. install nvm version manager: `wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash`
-    (If you already have nvm installed, make sure you have version 1.1.8 or later. If not, npm may throw incompatibility errors.)
 4. Open a new terminal, you must do this in order to proceed.
 5. install and use project version: `nvm install 14.20.1` then `nvm use 14.20.1` - this can be verified with `ng --version` (should have Node: 14.20.1 and Angular CLI: 11.2.14)
 6. set up a directory and clone your fork of the repo
 7. cd into `CIVAM/angular-frontend`
-8. install all dependencies: `npm install --legacy-peer-deps`
+8. install all dependencies: `npm install --legacy-peer-deps` #may take a while
 9. few more: `npm install jwt-decode ngx-audio-player --save`
 10. `npm install jwt-decode ng2-pdf-viewer@^7.0.0 --save`
 
@@ -56,7 +55,7 @@ Note that [General Setup](#General-Setup), [Front-End Specific Setup](#Front-End
      CREATE DATABASE django_db;
      CREATE USER django_user WITH PASSWORD 'password';
      ALTER ROLE django_user SET client_encoding TO 'utf8';
-     ALTER ROLE django_user SET default_transaction_isolation TO 'read     committed';
+     ALTER ROLE django_user SET default_transaction_isolation TO 'read committed';
      ALTER ROLE django_user SET timezone TO 'UTC';
      GRANT ALL PRIVILEGES ON DATABASE django_db TO django_user;
      \c django_db
@@ -119,13 +118,9 @@ From `CIVAM/django_project`, run:
 #### Notes from legacy README regarding local deployment, **take with a grain of salt**: 
 * An easier way to load the frontend and backend site locally is to run `./run.sh` in the CISC475_D5 directory. It will take care of everything for you.
 * When running the front and backend of the project locally with a copy of the database, the collection images will show up as black squares. Don't fear though as this is normal. The URL for the images changes since you will be running on localhost. If you want to see how things react with actual images, you can go to the django admin site http://127.0.0.1:8000/admin and create your own user and add some test collection data.
-
 ---------------------------------
 ### General notes from legacy README, **take with a grain of salt**:
 * Always run postgresql service before migrating or running django
-* Any errors that mention port5432 or errors in python installation directories are likely caused by postgresql service not being run
-* If you get this warning: “Your global Angular CLI version (#.#.#) is greater than your local version (#.#.#). The local Angular CLI version is used” then run: `npm install --save-dev @angular/cli@latest`
-* If you have problems with migrations locally, follow the Backend Dev & Cleaning Instructions
 * To stop the frontend's process, run `ps -ef | grep "ng serve"`, find the PID of the process, and run `kill <PID>`.
 * To stop the backend's process, run `ps auxw | grep runserver`, find the PID of the process, and run `kill <PID>`.
 * The following migration files are not needed for local development and need to be deleted in order to run the site locally:
@@ -133,6 +128,16 @@ From `CIVAM/django_project`, run:
 django_project/civam/migrations/0006_auto_20200528_1202.py
 django_project/civam/migrations/0007_collection_dates.py 
 ```
-
+-----------------------------------
+### Errors and Solutions:
+* psycopg2 installation error: it's missing dependencies, do `sudo apt-get install libpq-dev python3-dev`
+* webpack errors: You may need to install a webpack that is compatible with CLI 11.2.14. Try to install angular builders node webpack version 11.x
+* If you have problems with migrations locally, follow the Backend Dev & Cleaning Instructions
+* Any errors that mention port5432 or errors in python installation directories are likely caused by postgresql service not being run
+----------------------------------
+### Changes made from legacy README
+* comment removed regarding NVM (step 3 front end)-> "If you already have nvm installed, make sure you have version 1.1.8 or later. If not, npm may throw incompatibility errors." This was removed due to NVM only supporting version 0.39.0
+* Step 1 front-end altered use to be -> "install npm: `sudo npm install -g npm@latest`". This was changed due to later npm's not supporting the angular version used in this project. NOTE there may be better/more updated versions for all these tools that still work well together but as of now the versions listed in the steps works.
+* Removed a solution to an error -> "If you get this warning: “Your global Angular CLI version (#.#.#) is greater than your local version (#.#.#). The local Angular CLI version is used” then run: `npm install --save-dev @angular/cli@latest`". Installing latest CLI might ruin compatibility with all other versions used.
 ---
 
